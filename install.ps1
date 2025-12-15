@@ -1,33 +1,32 @@
 $ErrorActionPreference = "Stop"
 
-# Detect architecture
-$arch = (Get-CimInstance Win32_Processor).Architecture
-switch ($arch) {
-  9 { $ARCH = "amd64" }   # x64
-  12 { $ARCH = "arm64" }  # ARM64
-  default { Write-Error "Unsupported architecture"; exit 1 }
+$installDir = "$env:LOCALAPPDATA\Programs\Selfbest"
+$exePath = "$installDir\selfbest.exe"
+
+$arch = if ([Environment]::Is64BitOperatingSystem) {
+    if ($env:PROCESSOR_ARCHITECTURE -like "*ARM*") { "arm64" } else { "amd64" }
+} else {
+    Write-Error "Unsupported architecture"
 }
 
-$BIN = "selfbest-windows-$ARCH.exe"
-$URL = "https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/releases/latest/download/$BIN"
+$url = "https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/releases/latest/download/selfbest-windows-$arch.exe"
 
-Write-Host "Downloading $BIN..."
+Write-Host "⬇️ Downloading SelfBest CLI ($arch)..."
+New-Item -ItemType Directory -Force -Path $installDir | Out-Null
+Invoke-WebRequest $url -OutFile $exePath
 
-Invoke-WebRequest $URL -OutFile selfbest.exe
+Write-Host "🛠 Installing..."
 
-$InstallDir = "$env:USERPROFILE\selfbest"
-New-Item -ItemType Directory -Force -Path $InstallDir | Out-Null
-Move-Item selfbest.exe "$InstallDir\selfbest.exe" -Force
-
-# Add to PATH
-$UserPath = [Environment]::GetEnvironmentVariable("PATH", "User")
-if ($UserPath -notlike "*$InstallDir*") {
-  [Environment]::SetEnvironmentVariable(
-    "PATH",
-    "$UserPath;$InstallDir",
-    "User"
-  )
+# Add to PATH if missing
+$path = [Environment]::GetEnvironmentVariable("PATH", "User")
+if ($path -notlike "*$installDir*") {
+    [Environment]::SetEnvironmentVariable(
+        "PATH",
+        "$path;$installDir",
+        "User"
+    )
+    Write-Host "✅ Added to PATH"
 }
 
-Write-Host "`nSelfbest installed successfully!"
-Write-Host "Restart PowerShell and run: selfbest version"
+Write-Host "🎉 Installation complete!"
+Write-Host "👉 Restart PowerShell, then run: selfbest version"
