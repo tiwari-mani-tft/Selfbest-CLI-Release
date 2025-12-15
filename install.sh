@@ -11,27 +11,27 @@ case "$ARCH" in
 esac
 
 case "$OS" in
-  linux) OS="linux" ;;
-  darwin) OS="darwin" ;;
+  linux|darwin) ;;
   *) echo "Unsupported OS: $OS" && exit 1 ;;
 esac
 
-BIN="selfbest-$OS-$ARCH"
-ZIP="$BIN.zip"
+ZIP="selfbest-$OS-$ARCH.zip"
 URL="https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/releases/latest/download/$ZIP"
 
 TMP_DIR="$(mktemp -d)"
 
 echo "Downloading Selfbest CLI ($OS/$ARCH)..."
-curl -sSL "$URL" -o "$TMP_DIR/$ZIP"
+curl -fL "$URL" -o "$TMP_DIR/$ZIP"
 
 echo "Extracting..."
 unzip -q "$TMP_DIR/$ZIP" -d "$TMP_DIR"
 
-chmod +x "$TMP_DIR/$BIN"
-sudo mv "$TMP_DIR/$BIN" /usr/local/bin/selfbest
+BIN_PATH="$(find "$TMP_DIR" -type f -maxdepth 1 | head -n 1)"
+
+chmod +x "$BIN_PATH"
+sudo mv "$BIN_PATH" /usr/local/bin/selfbest
 
 rm -rf "$TMP_DIR"
 
 echo "Installation complete"
-echo "Run: selfbest version"
+selfbest version
