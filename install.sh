@@ -17,7 +17,7 @@ case "$OS" in
 esac
 
 ARCHIVE="selfbest-$OS-$ARCH.tar.gz"
-BIN="selfbest-$OS-$ARCH"
+BIN="selfbest"
 URL="https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/releases/latest/download/$ARCHIVE"
 
 echo "Downloading $ARCHIVE..."
