@@ -30,4 +30,4 @@ if ($UserPath -notlike "*$InstallDir*") {
 }
 
 Write-Host "`nSelfbest installed successfully!"
-Write-Host "Restart PowerShell and run: selfbest --version"
+Write-Host "Restart PowerShell and run: selfbest version"
