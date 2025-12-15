@@ -17,6 +17,7 @@ case "$OS" in
 esac
 
 ARCHIVE="selfbest-$OS-$ARCH.tar.gz"
+BIN="selfbest-$OS-$ARCH"
 URL="https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/releases/latest/download/$ARCHIVE"
 
 echo "Downloading $ARCHIVE..."
@@ -25,8 +26,8 @@ curl -fL "$URL" -o "$ARCHIVE"
 echo "Extracting..."
 tar -xzf "$ARCHIVE"
 
-chmod +x selfbest
-sudo mv selfbest /usr/local/bin/selfbest
+chmod +x "$BIN"
+sudo mv "$BIN" /usr/local/bin/selfbest
 
 rm -f "$ARCHIVE"
 
