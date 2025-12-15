@@ -11,25 +11,25 @@ case "$ARCH" in
 esac
 
 case "$OS" in
-  linux|darwin) ;;
+  linux) OS="linux" ;;
+  darwin) OS="darwin" ;;
   *) echo "Unsupported OS: $OS" && exit 1 ;;
 esac
 
 ARCHIVE="selfbest-$OS-$ARCH.tar.gz"
+BIN="selfbest-$OS-$ARCH"
 URL="https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/releases/latest/download/$ARCHIVE"
 
-TMP_DIR="$(mktemp -d)"
-
-echo "Downloading Selfbest CLI ($OS/$ARCH)..."
-curl -fL "$URL" -o "$TMP_DIR/$ARCHIVE"
+echo "Downloading $ARCHIVE..."
+curl -fL "$URL" -o "$ARCHIVE"
 
 echo "Extracting..."
-tar -xzf "$TMP_DIR/$ARCHIVE" -C "$TMP_DIR"
+tar -xzf "$ARCHIVE"
 
-chmod +x "$TMP_DIR/selfbest-$OS-$ARCH"
-sudo mv "$TMP_DIR/selfbest-$OS-$ARCH" /usr/local/bin/selfbest
+chmod +x "$BIN"
+sudo mv "$BIN" /usr/local/bin/selfbest
 
-rm -rf "$TMP_DIR"
+rm -f "$ARCHIVE"
 
 echo "Installation complete"
-echo "Run: selfbest version"
+selfbest version
