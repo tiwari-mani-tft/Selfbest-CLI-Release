@@ -19,4 +19,4 @@ curl -LO "https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/releases/lates
 chmod +x "$BIN"
 sudo mv "$BIN" /usr/local/bin/selfbest
 
-selfbest --version
+selfbest version
