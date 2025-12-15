@@ -17,19 +17,23 @@ case "$OS" in
 esac
 
 ARCHIVE="selfbest-$OS-$ARCH.tar.gz"
-BIN="selfbest-$OS-$ARCH"
 URL="https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/releases/latest/download/$ARCHIVE"
 
+TMP_DIR="$(mktemp -d)"
+
 echo "Downloading $ARCHIVE..."
-curl -fL "$URL" -o "$ARCHIVE"
+curl -fL "$URL" -o "$TMP_DIR/$ARCHIVE"
 
 echo "Extracting..."
-tar -xzf "$ARCHIVE"
+tar -xzf "$TMP_DIR/$ARCHIVE" -C "$TMP_DIR"
 
-chmod +x "$BIN"
-sudo mv "$BIN" /usr/local/bin/selfbest
+# Find the extracted binary (assuming the binary is named 'selfbest')
+BINARY_PATH=$(find "$TMP_DIR" -type f -name "selfbest*" | head -n 1)
 
-rm -f "$ARCHIVE"
+chmod +x "$BINARY_PATH"
+sudo mv "$BINARY_PATH" /usr/local/bin/selfbest
+
+rm -rf "$TMP_DIR"
 
 echo "Installation complete"
 selfbest version
