@@ -19,21 +19,16 @@ esac
 ARCHIVE="selfbest-$OS-$ARCH.tar.gz"
 URL="https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/releases/latest/download/$ARCHIVE"
 
-TMP_DIR="$(mktemp -d)"
-
 echo "Downloading $ARCHIVE..."
-curl -fL "$URL" -o "$TMP_DIR/$ARCHIVE"
+curl -fL "$URL" -o "$ARCHIVE"
 
 echo "Extracting..."
-tar -xzf "$TMP_DIR/$ARCHIVE" -C "$TMP_DIR"
+tar -xzf "$ARCHIVE"
 
-# Find the extracted binary (assuming the binary is named 'selfbest')
-BINARY_PATH=$(find "$TMP_DIR" -type f -name "selfbest*" | head -n 1)
+chmod +x selfbest
+sudo mv selfbest /usr/local/bin/selfbest
 
-chmod +x "$BINARY_PATH"
-sudo mv "$BINARY_PATH" /usr/local/bin/selfbest
-
-rm -rf "$TMP_DIR"
+rm -f "$ARCHIVE"
 
 echo "Installation complete"
 selfbest version
