@@ -1,3 +1,6 @@
+#!/bin/bash
+set -e
+
 OS="$(uname -s | tr '[:upper:]' '[:lower:]')"
 ARCH="$(uname -m)"
 
@@ -14,9 +17,21 @@ case "$OS" in
 esac
 
 BIN="selfbest-$OS-$ARCH"
+ZIP="$BIN.zip"
+URL="https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/releases/latest/download/$ZIP"
 
-curl -LO "https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/releases/latest/download/$BIN"
-chmod +x "$BIN"
-sudo mv "$BIN" /usr/local/bin/selfbest
+TMP_DIR="$(mktemp -d)"
 
-selfbest version
+echo "Downloading Selfbest CLI ($OS/$ARCH)..."
+curl -sSL "$URL" -o "$TMP_DIR/$ZIP"
+
+echo "Extracting..."
+unzip -q "$TMP_DIR/$ZIP" -d "$TMP_DIR"
+
+chmod +x "$TMP_DIR/$BIN"
+sudo mv "$TMP_DIR/$BIN" /usr/local/bin/selfbest
+
+rm -rf "$TMP_DIR"
+
+echo "Installation complete"
+echo "Run: selfbest version"
