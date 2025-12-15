@@ -3,7 +3,6 @@ set -e
 
 OS="$(uname -s | tr '[:upper:]' '[:lower:]')"
 ARCH="$(uname -m)"
-echo "Installation started"
 case "$ARCH" in
   x86_64) ARCH="amd64" ;;
   arm64|aarch64) ARCH="arm64" ;;
