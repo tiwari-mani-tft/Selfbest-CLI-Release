@@ -3,7 +3,6 @@ $ErrorActionPreference = "Stop"
 
 # Install paths
 $installDir = "$env:LOCALAPPDATA\Programs\Selfbest"
-$exePath = "$installDir\selfbest.exe"
 $tempZip = "$env:TEMP\selfbest.zip"
 
 # Detect architecture
@@ -18,7 +17,7 @@ if ([Environment]::Is64BitOperatingSystem) {
     exit 1
 }
 
-# Download URL (ZIP)
+# Download URL
 $url = "https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/releases/latest/download/selfbest-windows-$arch.zip"
 
 Write-Host "Downloading Selfbest CLI ($arch)..."
@@ -30,14 +29,22 @@ New-Item -ItemType Directory -Force -Path $installDir | Out-Null
 Invoke-WebRequest -Uri $url -OutFile $tempZip
 
 Write-Host "Extracting..."
-
-# Extract binary
 Expand-Archive -Force $tempZip $installDir
-
-# Cleanup
 Remove-Item $tempZip
 
-Write-Host "Installing..."
+# Find extracted exe
+$extractedExe = Get-ChildItem $installDir -Filter "selfbest-windows-*.exe" | Select-Object -First 1
+
+if (-not $extractedExe) {
+    Write-Error "Selfbest binary not found after extraction"
+    exit 1
+}
+
+# Rename to selfbest.exe
+$finalExe = Join-Path $installDir "selfbest.exe"
+Move-Item -Force $extractedExe.FullName $finalExe
+
+Write-Host "Installed selfbest"
 
 # Add to PATH if missing
 $path = [Environment]::GetEnvironmentVariable("PATH", "User")
@@ -50,5 +57,7 @@ if ($path -notlike "*$installDir*") {
     Write-Host "Added to PATH"
 }
 
+Write-Host ""
 Write-Host "Installation complete"
-Write-Host "Restart PowerShell, then run: selfbest version"
+Write-Host "Restart PowerShell, then run:"
+selfbest version
