@@ -16,7 +16,6 @@ case "$OS" in
 esac
 
 ARCHIVE="selfbest-$OS-$ARCH.tar.gz"
-BIN="selfbest"
 URL="https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/releases/latest/download/$ARCHIVE"
 
 echo "Downloading $ARCHIVE..."
@@ -25,8 +24,16 @@ curl -fL "$URL" -o "$ARCHIVE"
 echo "Extracting..."
 tar -xzf "$ARCHIVE"
 
-chmod +x "$BIN"
-sudo mv "$BIN" /usr/local/bin/selfbest
+# Rename extracted binary to 'selfbest' if needed
+EXTRACTED_BIN="selfbest-$OS-$ARCH"
+
+if [ ! -f "$EXTRACTED_BIN" ]; then
+  echo "Error: Expected binary '$EXTRACTED_BIN' not found after extraction"
+  exit 1
+fi
+
+chmod +x "$EXTRACTED_BIN"
+sudo mv "$EXTRACTED_BIN" /usr/local/bin/selfbest
 
 rm -f "$ARCHIVE"
 
