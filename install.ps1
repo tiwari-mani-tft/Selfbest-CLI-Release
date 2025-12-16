@@ -44,7 +44,7 @@ if (-not $extractedExe) {
 $finalExe = Join-Path $installDir "selfbest.exe"
 Move-Item -Force $extractedExe.FullName $finalExe
 
-Write-Host "Installed selfbest"
+Write-Host "Installing... selfbest"
 
 # Add to PATH if missing
 $path = [Environment]::GetEnvironmentVariable("PATH", "User")
@@ -59,5 +59,4 @@ if ($path -notlike "*$installDir*") {
 
 Write-Host ""
 Write-Host "Installation complete"
-Write-Host "Restart PowerShell, then run:"
 selfbest version
