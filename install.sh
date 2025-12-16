@@ -21,7 +21,7 @@ URL="https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/releases/latest/dow
 echo "Downloading $ARCHIVE..."
 curl -fL "$URL" -o "$ARCHIVE"
 
-echo "Extracting..."
+echo "Extracting"
 tar -xzf "$ARCHIVE"
 
 # Rename extracted binary to 'selfbest' if needed
