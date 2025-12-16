@@ -59,4 +59,5 @@ if ($path -notlike "*$installDir*") {
 
 Write-Host ""
 Write-Host "Installation complete"
-selfbest version
+Write-Host "Restart PowerShell, then run:"
+Write-Host "selfbest version"
