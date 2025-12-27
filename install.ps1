@@ -18,7 +18,7 @@ if ([Environment]::Is64BitOperatingSystem) {
 }
 
 # Download URL
-$url = "https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/releases/latest/download/selfbest-windows-$arch.zip"
+$url = "https://github.com/kha-javed-tft/Selfbest_user_cli/releases/latest/download/selfbest-windows-$arch.zip"
 
 Write-Host "Downloading Selfbest CLI ($arch)..."
 
