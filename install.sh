@@ -16,7 +16,7 @@ case "$OS" in
 esac
 
 ARCHIVE="selfbest-$OS-$ARCH.tar.gz"
-URL="https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/releases/latest/download/$ARCHIVE"
+URL="https://github.com/kha-javed-tft/Selfbest_user_cli/releases/latest/download/$ARCHIVE"
 
 echo "Downloading $ARCHIVE..."
 curl -fL "$URL" -o "$ARCHIVE"
