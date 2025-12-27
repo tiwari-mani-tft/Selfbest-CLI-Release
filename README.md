@@ -10,7 +10,7 @@ SelfBest CLI is a powerful command-line tool to manage your SelfBest account, at
 Open **PowerShell** and run:
 
 ```powershell
-iwr -useb https://raw.githubusercontent.com/tiwari-mani-tft/Selfbest-CLI-Release/main/install.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/tiwari-mani-tft/Selfbest-CLI-Release/main/release/prod-install.ps1 | iex
 ```
 
 ### Linux/Mac
@@ -18,7 +18,7 @@ iwr -useb https://raw.githubusercontent.com/tiwari-mani-tft/Selfbest-CLI-Release
 Open **terminal** and run:
 
 ```terminal
-curl -sSL https://raw.githubusercontent.com/tiwari-mani-tft/Selfbest-CLI-Release/main/install.sh | bash
+curl -sSL https://raw.githubusercontent.com/tiwari-mani-tft/Selfbest-CLI-Release/main/release/prod-install.sh | bash
 ```
 
 ---
@@ -33,7 +33,7 @@ curl -sSL https://raw.githubusercontent.com/tiwari-mani-tft/Selfbest-CLI-Release
 Open **PowerShell** and run:
 
 ```powershell
-iwr -useb https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/blob/main/release/staging-install.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/tiwari-mani-tft/Selfbest-CLI-Release/main/release/staging-install.ps1 | iex
 ```
 
 ### Linux/Mac
@@ -41,7 +41,7 @@ iwr -useb https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/blob/main/rele
 Open **terminal** and run:
 
 ```terminal
-curl -sSL https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/blob/main/release/staging-install.sh | bash
+curl -sSL https://raw.githubusercontent.com/tiwari-mani-tft/Selfbest-CLI-Release/main/release/staging-install.sh | bash
 ```
 
 ---
@@ -53,7 +53,7 @@ curl -sSL https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/blob/main/rele
 Open **PowerShell** and run:
 
 ```powershell
-iwr -useb https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/blob/main/release/any-install.ps1 | iex
+iwr -useb https://raw.githubusercontent.com/tiwari-mani-tft/Selfbest-CLI-Release/main/release/any-install.ps1 | iex
 ```
 
 ### Linux/Mac
@@ -61,6 +61,6 @@ iwr -useb https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/blob/main/rele
 Open **terminal** and run:
 
 ```terminal
-curl -sSL https://github.com/tiwari-mani-tft/Selfbest-CLI-Release/blob/main/release/any-install.sh | bash
+curl -sSL https://raw.githubusercontent.com/tiwari-mani-tft/Selfbest-CLI-Release/main/release/any-install.sh | bash
 ```
 
